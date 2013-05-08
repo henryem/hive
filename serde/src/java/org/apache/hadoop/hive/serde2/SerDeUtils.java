@@ -375,7 +375,7 @@ public final class SerDeUtils {
   /**
    * return false though element is null if nullsafe flag is true for that
    */
-  public static boolean hasAnyNullObject(List o, StandardStructObjectInspector loi,
+  public static boolean hasAnyNullObject(List o, StructObjectInspector loi,
       boolean[] nullSafes) {
     List<? extends StructField> fields = loi.getAllStructFieldRefs();
     for (int i = 0; i < o.size();i++) {

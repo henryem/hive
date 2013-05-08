@@ -205,15 +205,15 @@ public class GroupByOperator extends Operator<GroupByDesc> implements
     // reduce KEY has union field as the last field if there are distinct
     // aggregates in group-by.
     List<? extends StructField> sfs =
-      ((StandardStructObjectInspector) rowInspector).getAllStructFieldRefs();
+      ((StructObjectInspector) rowInspector).getAllStructFieldRefs();
     if (sfs.size() > 0) {
       StructField keyField = sfs.get(0);
       if (keyField.getFieldName().toUpperCase().equals(
           Utilities.ReduceField.KEY.name())) {
         ObjectInspector keyObjInspector = keyField.getFieldObjectInspector();
-        if (keyObjInspector instanceof StandardStructObjectInspector) {
+        if (keyObjInspector instanceof StructObjectInspector) {
           List<? extends StructField> keysfs =
-            ((StandardStructObjectInspector) keyObjInspector).getAllStructFieldRefs();
+            ((StructObjectInspector) keyObjInspector).getAllStructFieldRefs();
           if (keysfs.size() > 0) {
             // the last field is the union field, if any
             StructField sf = keysfs.get(keysfs.size() - 1);

@@ -58,7 +58,7 @@ public class UDTFOperator extends Operator<UDTFDesc> implements Serializable {
 
     // Make an object inspector [] of the arguments to the UDTF
     List<? extends StructField> inputFields =
-        ((StandardStructObjectInspector) inputObjInspectors[0]).getAllStructFieldRefs();
+        ((StructObjectInspector) inputObjInspectors[0]).getAllStructFieldRefs();
 
     udtfInputOIs = new ObjectInspector[inputFields.size()];
     for (int i = 0; i < inputFields.size(); i++) {
@@ -88,7 +88,7 @@ public class UDTFOperator extends Operator<UDTFDesc> implements Serializable {
   @Override
   public void processOp(Object row, int tag) throws HiveException {
     // The UDTF expects arguments in an object[]
-    StandardStructObjectInspector soi = (StandardStructObjectInspector) inputObjInspectors[tag];
+    StructObjectInspector soi = (StructObjectInspector) inputObjInspectors[tag];
     List<? extends StructField> fields = soi.getAllStructFieldRefs();
 
     for (int i = 0; i < fields.size(); i++) {
